@@ -9,3 +9,155 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// schema.prisma
+
+model Customer {
+  id              Int      @id @default(autoincrement())
+  email           String   @unique
+  hashed_password String
+  first_name      String?
+  last_name       String?
+  address         String?
+  phone_number    String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  payments  Payment[]
+  orders    Order[]
+  shipments Shipment[]
+
+  cart     Cart?
+  wishlist Wishlist?
+}
+
+model Payment {
+  id            Int      @id @default(autoincrement())
+  paymentDate   DateTime
+  paymentMethod String
+  amount        Decimal
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  customer   Customer? @relation(fields: [customerId], references: [id])
+  customerId Int?
+
+  orders Order[]
+}
+
+model Shipment {
+  id           Int       @id @default(autoincrement())
+  shipmentDate DateTime?
+  address      String?
+  city         String?
+  state        String?
+  country      String?
+  zipCode      String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  customer   Customer? @relation(fields: [customerId], references: [id])
+  customerId Int?
+
+  orders Order[]
+}
+
+model Order {
+  id         Int       @id @default(autoincrement())
+  orderDate  DateTime?
+  totalPrice Decimal?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  customer   Customer? @relation(fields: [customerId], references: [id])
+  customerId Int?
+
+  payment   Payment? @relation(fields: [paymentId], references: [id])
+  paymentId Int?
+
+  shipment   Shipment? @relation(fields: [shipmentId], references: [id])
+  shipmentId Int?
+
+  orderItem OrderItem?
+}
+
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  quantity  Int
+  price     Decimal
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+
+  order   Order? @relation(fields: [orderId], references: [id])
+  orderId Int?   @unique
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  SKU         String?
+  quantity    Int
+  price       Decimal
+  stock       Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orderItems OrderItem[]
+
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+
+  carts     Cart[]
+  wishlists Wishlist[]
+
+  Discount   Discount? @relation(fields: [discountId], references: [id])
+  discountId Int?
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+
+  customer   Customer? @relation(fields: [customerId], references: [id])
+  customerId Int?      @unique
+}
+
+model Wishlist {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+
+  customer   Customer? @relation(fields: [customerId], references: [id])
+  customerId Int?      @unique
+}
+
+model Discount {
+  id              Int      @id @default(autoincrement())
+  name            String
+  description     String
+  discountPercent Decimal
+  active          Boolean
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  products Product[]
+}
