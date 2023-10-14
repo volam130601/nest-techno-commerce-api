@@ -1,0 +1,21 @@
+#docker compose up -d
+
+#How to remove container+volumes
+#docker compose rm dev-database --stop --force --volumes
+version: '3.8'
+services:
+  dev-techno-database:
+    image: postgres:15.0
+    container_name: dev-techno-database
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Abc123456
+      POSTGRES_DB: technodb
+    networks:
+      - nestjs-techno-networks
+networks:
+  nestjs-techno-networks:
+
+
