@@ -20,6 +20,7 @@ model Customer {
   lastName       String?
   address        String?
   phoneNumber    String?
+  avatar         String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
