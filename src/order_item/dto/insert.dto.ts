@@ -1,17 +1,19 @@
-import { IsNotEmpty } from "class-validator"
+import { IsNotEmpty, IsNumber, IsNumberString, IsOptional } from "class-validator"
 
 export class InsertOrderItemDTO {
-    @IsNotEmpty()
-    quantity: number
+  @IsNumber()
+  @IsNotEmpty()
+  quantity: number
 
-    @IsNotEmpty()
-    price: number
+  @IsNumberString()
+  @IsNotEmpty()
+  price: number
 
-    @IsNotEmpty()
-    productId: number
+  @IsOptional()
+  productId?: number
 
-    @IsNotEmpty()
-    orderId: number
+  @IsOptional()
+  orderId?: number
 }
 
 /**

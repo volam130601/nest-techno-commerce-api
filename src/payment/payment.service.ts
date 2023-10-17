@@ -6,6 +6,7 @@ import { InsertPaymentDTO, UpdatePaymentDTO } from './dto';
 export class PaymentService {
     constructor(private prismaService: PrismaService) {
     }
+
     getAllPayments(customerId: number) {
         const payments = this.prismaService.payment.findMany({
             where: {

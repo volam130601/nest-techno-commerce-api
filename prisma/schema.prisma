@@ -79,7 +79,7 @@ model Order {
   shipment   Shipment? @relation(fields: [shipmentId], references: [id])
   shipmentId Int?
 
-  orderItem OrderItem?
+  orderItems OrderItem[]
 }
 
 model OrderItem {
@@ -93,16 +93,16 @@ model OrderItem {
   productId Int?
 
   order   Order? @relation(fields: [orderId], references: [id])
-  orderId Int?   @unique
+  orderId Int?
 }
 
 model Product {
   id          Int      @id @default(autoincrement())
   name        String
   description String
-  SKU         String?
   quantity    Int
   price       Decimal
+  SKU         String?
   stock       Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
