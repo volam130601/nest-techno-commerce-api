@@ -107,24 +107,24 @@ model Product {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  orderItems OrderItem[]
-
   category   Category? @relation(fields: [categoryId], references: [id])
   categoryId Int?
 
-  carts     Cart[]
-  wishlists Wishlist[]
-
   Discount   Discount? @relation(fields: [discountId], references: [id])
   discountId Int?
+
+  carts      Cart[]
+  wishlists  Wishlist[]
+  orderItems OrderItem[]
 }
 
 model Category {
-  id        Int       @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  products  Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
 }
 
 model Cart {
@@ -132,6 +132,7 @@ model Cart {
   quantity  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
   product   Product? @relation(fields: [productId], references: [id])
   productId Int?
 

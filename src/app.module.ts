@@ -7,10 +7,11 @@ import {
 import { CustomerModule } from './customer/customer.module';
 import { PaymentModule } from './payment/payment.module';
 import { ShipmentModule } from './shipment/shipment.module';
+import { OrderModule } from './order/order.module';
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true
   }),
-    AuthModule, PrismaModule, CustomerModule, PaymentModule, ShipmentModule]
+    AuthModule, PrismaModule, CustomerModule, PaymentModule, ShipmentModule, OrderModule]
 })
 export class AppModule { }
