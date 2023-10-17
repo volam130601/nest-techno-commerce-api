@@ -47,12 +47,12 @@ export class PaymentService {
         paymentId: number,
         updatePaymentDTO: UpdatePaymentDTO
     ) {
-        const note = this.prismaService.payment.findUnique({
+        const payment = this.prismaService.payment.findUnique({
             where: {
                 id: paymentId
             }
         })
-        if (!note) {
+        if (!payment) {
             throw new ForbiddenException('Cannot find Payment to update')
         }
         return this.prismaService.payment.update({
@@ -63,15 +63,15 @@ export class PaymentService {
         })
     }
 
-    async deletePaymentById(
+    deletePaymentById(
         paymentId: number,
     ) {
-        const note = this.prismaService.payment.findUnique({
+        const payment = this.prismaService.payment.findUnique({
             where: {
                 id: paymentId
             }
         })
-        if (!note) {
+        if (!payment) {
             throw new ForbiddenException('Cannot find Payment to delete')
         }
         return this.prismaService.payment.delete({
