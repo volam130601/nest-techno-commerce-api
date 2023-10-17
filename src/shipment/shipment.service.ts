@@ -48,6 +48,7 @@ export class ShipmentService {
         shipmentId: number,
         updateShipmentDTO: UpdateShipmentDTO
     ) {
+        updateShipmentDTO.shipmentDate = new Date(updateShipmentDTO.shipmentDate)
         const shipment = this.prismaService.shipment.findUnique({
             where: {
                 id: shipmentId
