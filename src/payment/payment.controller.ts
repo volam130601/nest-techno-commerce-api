@@ -1,7 +1,7 @@
 import { Controller, Get, Param, ParseIntPipe, Body, Post, Delete, Patch, HttpCode, HttpStatus, UseGuards, Query } from '@nestjs/common';
 import { InsertPaymentDTO, UpdatePaymentDTO } from './dto';
 import { MyJwtGuard } from '../auth/guard';
-import { GetCustomer } from 'src/auth/decorator';
+import { GetCustomer } from '../auth/decorator';
 import { PaymentService } from './payment.service';
 @UseGuards(MyJwtGuard)
 @Controller('payments')

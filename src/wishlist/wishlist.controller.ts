@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseIntPipe, Body, Post, Delete, Patch, HttpCode, HttpStatus, UseGuards, Query } from '@nestjs/common';
 import { MyJwtGuard } from '../auth/guard';
-import { GetCustomer } from 'src/auth/decorator';
+import { GetCustomer } from '../auth/decorator';
 import { WishlistService } from './wishlist.service';
 import { InsertWishlistDTO, UpdateWishlistDTO } from './dto';
 
