@@ -27,9 +27,8 @@ model Customer {
   payments  Payment[]
   orders    Order[]
   shipments Shipment[]
-
-  cart     Cart?
-  wishlist Wishlist?
+  carts     Cart[]
+  wishlists Wishlist[]
 }
 
 model Payment {
@@ -137,7 +136,7 @@ model Cart {
   productId Int?
 
   customer   Customer? @relation(fields: [customerId], references: [id])
-  customerId Int?      @unique
+  customerId Int?
 }
 
 model Wishlist {
@@ -149,7 +148,7 @@ model Wishlist {
   productId Int?
 
   customer   Customer? @relation(fields: [customerId], references: [id])
-  customerId Int?      @unique
+  customerId Int?
 }
 
 model Discount {

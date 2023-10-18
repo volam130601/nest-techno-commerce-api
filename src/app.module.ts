@@ -10,10 +10,12 @@ import { ShipmentModule } from './shipment/shipment.module';
 import { OrderModule } from './order/order.module';
 import { OrderItemModule } from './order_item/order_item.module';
 import { ProductModule } from './product/product.module';
+import { CategoryModule } from './category/category.module';
+import { CartModule } from './cart/cart.module';
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true
   }),
-    AuthModule, PrismaModule, CustomerModule, PaymentModule, ShipmentModule, OrderModule, OrderItemModule, ProductModule]
+    AuthModule, PrismaModule, CustomerModule, PaymentModule, ShipmentModule, OrderModule, OrderItemModule, ProductModule, CategoryModule, CartModule]
 })
 export class AppModule { }

@@ -34,7 +34,7 @@ export class ShipmentController {
 
     @HttpCode(HttpStatus.NO_CONTENT)
     @Delete()
-    deletesShipmentById(
+    deleteShipmentById(
         @Query('id', ParseIntPipe) shipmentId: number,
     ) { return this.shipmentService.deleteShipmentById(shipmentId) }
 }

@@ -34,7 +34,7 @@ export class OrderController {
 
     @HttpCode(HttpStatus.NO_CONTENT)
     @Delete()
-    deletesOrderById(
+    deleteOrderById(
         @Query('id', ParseIntPipe) orderId: number,
     ) { return this.orderService.deleteOrderById(orderId) }
 }
